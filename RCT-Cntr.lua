@@ -7,8 +7,8 @@
 	Great for counting for example how many times retracts 
 	have been used and to keep track of service-intervalls.
 	
-	Three counters are possible to configure, Counter 1 can
-	be used as telemetry window on main screen.
+	Five counters are possible to configure, Counters 1 and 2
+	can be used as telemetry window on main screen.
 	
 	Label can be configured for all counters and counter
 	display is updated on app-screen per usage.
@@ -19,31 +19,42 @@
 	Max value is 32767, after that counter resets to 0.
 	
 	---------------------------------------------------------
-	
-	Event Counter is also included in RC-Thoughts Tools.
-	
+	Event Counter is a part of RC-Thoughts Jeti Tools.
 	---------------------------------------------------------
 	Released under MIT-license by Tero @ RC-Thoughts.com 2016
 	---------------------------------------------------------
 --]]
 
 local appName = "Event Counter"
-local cnt1, cnt2, cnt3, cntLb1, cntLb2, cntLb3, cntSw1, cntSw2, cntSw3
-local stateCnt1, stateCnt2, stateCnt3 = 0,0,0
 ----------------------------------------------------------------------
+-- Locals for the application
+local cnt1, cnt2, cnt3, cnt4, cnt5
+local cntLb1, cntLb2, cntLb3, cntLb4, cntLb5
+local cntSw1, cntSw2, cntSw3, cntSw4, cntSw5
+local stateCnt1, stateCnt2, stateCnt3, stateCnt4, stateCnt5 = 0,0,0,0,0
+----------------------------------------------------------------------
+-- Draw telemetry screen for main display
 local function printCounter1()
 	lcd.drawText(145 - lcd.getTextWidth(FONT_BIG,string.format("%.0f", cnt1)),0,string.format("%.0f", cnt1),FONT_BIG)
 end
+
+local function printCounter2()
+	lcd.drawText(145 - lcd.getTextWidth(FONT_BIG,string.format("%.0f", cnt2)),0,string.format("%.0f", cnt2),FONT_BIG)
+end
 ----------------------------------------------------------------------
+-- Store settings when changed by user
 local function cntLbChanged1(value)
 	cntLb1=value
 	system.pSave("cntLb1",value)
+	-- Redraw telemetrywindow if label is changed by user
 	system.registerTelemetry(1,cntLb1,1,printCounter1)
 end
 
 local function cntLbChanged2(value)
 	cntLb2=value
 	system.pSave("cntLb2",value)
+	-- Redraw telemetrywindow if label is changed by user
+	system.registerTelemetry(2,cntLb2,1,printCounter2)
 end
 
 local function cntLbChanged3(value)
@@ -51,6 +62,16 @@ local function cntLbChanged3(value)
 	system.pSave("cntLb3",value)
 end
 
+local function cntLbChanged4(value)
+	cntLb4=value
+	system.pSave("cntLb4",value)
+end
+
+local function cntLbChanged5(value)
+	cntLb5=value
+	system.pSave("cntLb5",value)
+end
+--
 local function cntChanged1(value)
 	cnt1=value
 	system.pSave("cnt1",value)
@@ -66,6 +87,16 @@ local function cntChanged3(value)
 	system.pSave("cnt3",value)
 end
 
+local function cntChanged4(value)
+	cnt4=value
+	system.pSave("cnt4",value)
+end
+
+local function cntChanged5(value)
+	cnt5=value
+	system.pSave("cnt5",value)
+end
+--
 local function cntSwChanged1(value)
 	cntSw1 = value
 	system.pSave("cntSw1",value)
@@ -80,8 +111,22 @@ local function cntSwChanged3(value)
 	cntSw3 = value
 	system.pSave("cntSw3",value)
 end
+
+local function cntSwChanged4(value)
+	cntSw4 = value
+	system.pSave("cntSw4",value)
+end
+
+local function cntSwChanged5(value)
+	cntSw5 = value
+	system.pSave("cntSw5",value)
+end
 ----------------------------------------------------------------------
+-- Draw the main form (Application inteface)
 local function initForm()
+	form.addRow(1)
+	form.addLabel({label="---     RC-Thoughts Jeti Tools      ---",font=FONT_BIG})
+	
 	form.addRow(1)
 	form.addLabel({label="Counter 1",font=FONT_BOLD})
 	
@@ -101,7 +146,7 @@ local function initForm()
 	form.addLabel({label="Counter 2",font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label="Counter name",width=175})
+	form.addLabel({label="Telemetry window label",width=175})
 	form.addTextbox(cntLb2,14,cntLbChanged2)
 	
 	form.addRow(2)
@@ -126,13 +171,45 @@ local function initForm()
 	form.addRow(2)
 	form.addLabel({label="Current count"})
 	form.addIntbox(string.format("%f", cnt3),0,32767,0,0,1,cntChanged3)
+
+	form.addRow(1)
+	form.addLabel({label="Counter 4",font=FONT_BOLD})
+	
+	form.addRow(2)
+	form.addLabel({label="Counter name",width=175})
+	form.addTextbox(cntLb4,14,cntLbChanged4)
+	
+	form.addRow(2)
+	form.addLabel({label="Activating switch"})
+	form.addInputbox(cntSw4,true,cntSwChanged4)
+	
+	form.addRow(2)
+	form.addLabel({label="Current count"})
+	form.addIntbox(string.format("%f", cnt4),0,32767,0,0,1,cntChanged4)
+
+	form.addRow(1)
+	form.addLabel({label="Counter 5",font=FONT_BOLD})
+	
+	form.addRow(2)
+	form.addLabel({label="Counter name",width=175})
+	form.addTextbox(cntLb5,14,cntLbChanged5)
+	
+	form.addRow(2)
+	form.addLabel({label="Activating switch"})
+	form.addInputbox(cntSw5,true,cntSwChanged5)
+	
+	form.addRow(2)
+	form.addLabel({label="Current count"})
+	form.addIntbox(string.format("%f", cnt5),0,32767,0,0,1,cntChanged5)
 	
 	form.addRow(1)
 	form.addLabel({label="Powered by RC-Thoughts.com",font=FONT_MINI, alignRight=true})
 end
 ----------------------------------------------------------------------
+-- Runtime functions, read status of switches and store latching switch state
+-- also resets count if reaches over 32767
 local function loop()
-	local cntSw1, cntSw2, cntSw3 = system.getInputsVal(cntSw1, cntSw2, cntSw3)
+	local cntSw1, cntSw2, cntSw3, cntSw4, cntSw5 = system.getInputsVal(cntSw1, cntSw2, cntSw3, cntSw4, cntSw5)
 	
 	if (cntSw1 == 1 and stateCnt1 == 0) then
 		stateCnt1 = 1
@@ -172,20 +249,54 @@ local function loop()
 			stateCnt3 = 0
 		end
 	end
+	
+	if (cntSw4 == 1 and stateCnt4 == 0) then
+		stateCnt4 = 1
+		cnt4 = cnt4 + 1
+		if (cnt4 == 32768) then
+			cnt4 = 0
+		end
+		system.pSave("cnt4",cnt4)
+		form.reinit()
+		else if (cntSw4 ~= 1 and stateCnt4 == 1) then
+			stateCnt4 = 0
+		end
+	end
+	
+	if (cntSw5 == 1 and stateCnt5 == 0) then
+		stateCnt5 = 1
+		cnt5 = cnt5 + 1
+		if (cnt5 == 32768) then
+			cnt5 = 0
+		end
+		system.pSave("cnt5",cnt5)
+		form.reinit()
+		else if (cntSw5 ~= 1 and stateCnt5 == 1) then
+			stateCnt5 = 0
+		end
+	end
 end
 ----------------------------------------------------------------------
+-- Application initialization
 local function init()
 	system.registerForm(1,MENU_APPS,appName,initForm)	
 	cntLb1 = system.pLoad("cntLb1", "Counter 1")
 	cntLb2 = system.pLoad("cntLb2", "Counter 2")
 	cntLb3 = system.pLoad("cntLb3", "Counter 3")
+	cntLb4 = system.pLoad("cntLb4", "Counter 4")
+	cntLb5 = system.pLoad("cntLb5", "Counter 5")
 	cnt1 = system.pLoad("cnt1", 0)
 	cnt2 = system.pLoad("cnt2", 0)
 	cnt3 = system.pLoad("cnt3", 0)
+	cnt4 = system.pLoad("cnt4", 0)
+	cnt5 = system.pLoad("cnt5", 0)
 	cntSw1 = system.pLoad("cntSw1")
 	cntSw2 = system.pLoad("cntSw2")
 	cntSw3 = system.pLoad("cntSw3")
+	cntSw4 = system.pLoad("cntSw3")
+	cntSw5 = system.pLoad("cntSw5")
 	system.registerTelemetry(1,cntLb1,1,printCounter1)
+	system.registerTelemetry(2,cntLb2,1,printCounter2)
 end
 ----------------------------------------------------------------------
-return { init=init, loop=loop, author="RC-Thoughts", version="1.0", name=appName}
+return { init=init, loop=loop, author="RC-Thoughts", version="1.2", name=appName}
