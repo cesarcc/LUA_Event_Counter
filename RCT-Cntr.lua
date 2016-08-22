@@ -8,7 +8,8 @@
 	have been used and to keep track of service-intervalls.
 	
 	Five counters are possible to configure, Counters 1 and 2
-	can be used as telemetry window on main screen.
+	can be used as telemetry window on main screen. Counters 
+	1 and 2 also have an alarm possibility (Switch).
 	
 	Label can be configured for all counters and counter
 	display is updated on app-screen per usage.
@@ -28,7 +29,7 @@
 local appName = "Event Counter"
 ----------------------------------------------------------------------
 -- Locals for the application
-local cnt1, cnt2, cnt3, cnt4, cnt5
+local cnt1, cnt2, cnt3, cnt4, cnt5, cntAlm1, cntAlm2
 local cntLb1, cntLb2, cntLb3, cntLb4, cntLb5
 local cntSw1, cntSw2, cntSw3, cntSw4, cntSw5
 local stateCnt1, stateCnt2, stateCnt3, stateCnt4, stateCnt5 = 0,0,0,0,0
@@ -70,6 +71,16 @@ end
 local function cntLbChanged5(value)
 	cntLb5=value
 	system.pSave("cntLb5",value)
+end
+--
+local function almChanged1(value)
+	cntAlm1=value
+	system.pSave("cntAlm1",value)
+end
+
+local function almChanged2(value)
+	cntAlm2=value
+	system.pSave("cntAlm2",value)
 end
 --
 local function cntChanged1(value)
@@ -142,6 +153,10 @@ local function initForm()
 	form.addLabel({label="Current count"})
 	form.addIntbox(string.format("%f", cnt1),0,32767,0,0,1,cntChanged1)
 	
+	form.addRow(2)
+	form.addLabel({label="Alarm value"})
+	form.addIntbox(string.format("%f", cntAlm1),0,32767,0,0,1,almChanged1)
+	
 	form.addRow(1)
 	form.addLabel({label="Counter 2",font=FONT_BOLD})
 	
@@ -156,6 +171,10 @@ local function initForm()
 	form.addRow(2)
 	form.addLabel({label="Current count"})
 	form.addIntbox(string.format("%f", cnt2),0,32767,0,0,1,cntChanged2)
+	
+	form.addRow(2)
+	form.addLabel({label="Alarm value"})
+	form.addIntbox(string.format("%f", cntAlm2),0,32767,0,0,1,almChanged2)
 	
 	form.addRow(1)
 	form.addLabel({label="Counter 3",font=FONT_BOLD})
@@ -207,7 +226,7 @@ local function initForm()
 end
 ----------------------------------------------------------------------
 -- Runtime functions, read status of switches and store latching switch state
--- also resets count if reaches over 32767
+-- also resets count if reaches over 32767 and takes care of counter switches
 local function loop()
 	local cntSw1, cntSw2, cntSw3, cntSw4, cntSw5 = system.getInputsVal(cntSw1, cntSw2, cntSw3, cntSw4, cntSw5)
 	
@@ -275,6 +294,18 @@ local function loop()
 			stateCnt5 = 0
 		end
 	end
+	
+	if (cntAlm1 > 0 and cnt1 >= cntAlm1) then
+		system.setControl(8, 1, 0, 0)
+		else
+		system.setControl(8, 0, 0, 0)
+	end
+	
+	if (cntAlm2 > 0 and cnt2 >= cntAlm2) then
+		system.setControl(9, 1, 0, 0)
+		else
+		system.setControl(9, 0, 0, 0)
+	end
 end
 ----------------------------------------------------------------------
 -- Application initialization
@@ -285,6 +316,8 @@ local function init()
 	cntLb3 = system.pLoad("cntLb3", "Counter 3")
 	cntLb4 = system.pLoad("cntLb4", "Counter 4")
 	cntLb5 = system.pLoad("cntLb5", "Counter 5")
+	cntAlm1 = system.pLoad("cntAlm1", 0)
+	cntAlm2 = system.pLoad("cntAlm2", 0)
 	cnt1 = system.pLoad("cnt1", 0)
 	cnt2 = system.pLoad("cnt2", 0)
 	cnt3 = system.pLoad("cnt3", 0)
@@ -297,6 +330,10 @@ local function init()
 	cntSw5 = system.pLoad("cntSw5")
 	system.registerTelemetry(1,cntLb1,1,printCounter1)
 	system.registerTelemetry(2,cntLb2,1,printCounter2)
+	system.registerControl(8, "Counter 1 Alm", "CS1")
+	system.registerControl(9, "Counter 2 Alm", "CS2")
+	system.setControl(8, 0, 0, 0)
+	system.setControl(9, 0, 0, 0)
 end
 ----------------------------------------------------------------------
-return { init=init, loop=loop, author="RC-Thoughts", version="1.2", name=appName}
+return { init=init, loop=loop, author="RC-Thoughts", version="1.3", name=appName}
