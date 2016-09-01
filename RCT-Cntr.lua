@@ -233,7 +233,7 @@ local function initForm()
 	form.addIntbox(string.format("%f", cnt4),0,32767,0,0,1,cntChanged4)
 
 	form.addRow(1)
-	form.addLabel({label="trans.counter5",font=FONT_BOLD})
+	form.addLabel({label=trans.counter5,font=FONT_BOLD})
 	
 	form.addRow(2)
 	form.addLabel({label=trans.counterName,width=175})
