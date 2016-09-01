@@ -1,6 +1,5 @@
 --[[
 	---------------------------------------------------------
-	
 	Event counter takes any switch available in transmitter
 	and count how many times it have been used. 
 	
@@ -19,20 +18,47 @@
 	
 	Max value is 32767, after that counter resets to 0.
 	
+	Localisation-file has to be as /Apps/Lang/RCT-Cntr.jsn
 	---------------------------------------------------------
 	Event Counter is a part of RC-Thoughts Jeti Tools.
 	---------------------------------------------------------
 	Released under MIT-license by Tero @ RC-Thoughts.com 2016
 	---------------------------------------------------------
 --]]
-
-local appName = "Event Counter"
 ----------------------------------------------------------------------
 -- Locals for the application
 local cnt1, cnt2, cnt3, cnt4, cnt5, cntAlm1, cntAlm2
 local cntLb1, cntLb2, cntLb3, cntLb4, cntLb5
 local cntSw1, cntSw2, cntSw3, cntSw4, cntSw5
 local stateCnt1, stateCnt2, stateCnt3, stateCnt4, stateCnt5 = 0,0,0,0,0
+----------------------------------------------------------------------
+-- Function for translation file-reading
+local function readFile(path) 
+	local f = io.open(path,"r")
+	local lines={}
+	if(f) then
+		while 1 do 
+			local buf=io.read(f,512)
+			if(buf ~= "")then 
+				lines[#lines+1] = buf
+				else
+				break   
+			end   
+		end 
+		io.close(f)
+		return table.concat(lines,"") 
+	end
+end 
+--------------------------------------------------------------------------------
+-- Read translations
+local function setLanguage()	
+	local lng=system.getLocale();
+	local file = readFile("Apps/Lang/RCT-Cntr.jsn")
+	local obj = json.decode(file)  
+	if(obj) then
+		trans = obj[lng] or obj[obj.default]
+	end
+end
 ----------------------------------------------------------------------
 -- Draw telemetry screen for main display
 local function printCounter1()
@@ -139,86 +165,86 @@ local function initForm()
 	form.addLabel({label="---     RC-Thoughts Jeti Tools      ---",font=FONT_BIG})
 	
 	form.addRow(1)
-	form.addLabel({label="Counter 1",font=FONT_BOLD})
+	form.addLabel({label=trans.counter1,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label="Telemetry window label",width=175})
+	form.addLabel({label=trans.labelW,width=175})
 	form.addTextbox(cntLb1,14,cntLbChanged1)
 	
 	form.addRow(2)
-	form.addLabel({label="Activating switch"})
+	form.addLabel({label=trans.switch})
 	form.addInputbox(cntSw1,true,cntSwChanged1)
 	
 	form.addRow(2)
-	form.addLabel({label="Current count"})
+	form.addLabel({label=trans.currentCnt})
 	form.addIntbox(string.format("%f", cnt1),0,32767,0,0,1,cntChanged1)
 	
 	form.addRow(2)
-	form.addLabel({label="Alarm value"})
+	form.addLabel({label=trans.almVal})
 	form.addIntbox(string.format("%f", cntAlm1),0,32767,0,0,1,almChanged1)
 	
 	form.addRow(1)
-	form.addLabel({label="Counter 2",font=FONT_BOLD})
+	form.addLabel({label=trans.counter2,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label="Telemetry window label",width=175})
+	form.addLabel({label=trans.labelW,width=175})
 	form.addTextbox(cntLb2,14,cntLbChanged2)
 	
 	form.addRow(2)
-	form.addLabel({label="Activating switch"})
+	form.addLabel({label=trans.switch})
 	form.addInputbox(cntSw2,true,cntSwChanged2)
 	
 	form.addRow(2)
-	form.addLabel({label="Current count"})
+	form.addLabel({label=trans.currentCnt})
 	form.addIntbox(string.format("%f", cnt2),0,32767,0,0,1,cntChanged2)
 	
 	form.addRow(2)
-	form.addLabel({label="Alarm value"})
+	form.addLabel({label=trans.almVal})
 	form.addIntbox(string.format("%f", cntAlm2),0,32767,0,0,1,almChanged2)
 	
 	form.addRow(1)
-	form.addLabel({label="Counter 3",font=FONT_BOLD})
+	form.addLabel({label=trans.counter3,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label="Counter name",width=175})
+	form.addLabel({label=trans.counterName,width=175})
 	form.addTextbox(cntLb3,14,cntLbChanged3)
 	
 	form.addRow(2)
-	form.addLabel({label="Activating switch"})
+	form.addLabel({label=trans.switch})
 	form.addInputbox(cntSw3,true,cntSwChanged3)
 	
 	form.addRow(2)
-	form.addLabel({label="Current count"})
+	form.addLabel({label=trans.currentCnt})
 	form.addIntbox(string.format("%f", cnt3),0,32767,0,0,1,cntChanged3)
 
 	form.addRow(1)
-	form.addLabel({label="Counter 4",font=FONT_BOLD})
+	form.addLabel({label=trans.counter4,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label="Counter name",width=175})
+	form.addLabel({label=trans.counterName,width=175})
 	form.addTextbox(cntLb4,14,cntLbChanged4)
 	
 	form.addRow(2)
-	form.addLabel({label="Activating switch"})
+	form.addLabel({label=trans.switch})
 	form.addInputbox(cntSw4,true,cntSwChanged4)
 	
 	form.addRow(2)
-	form.addLabel({label="Current count"})
+	form.addLabel({label=trans.currentCnt})
 	form.addIntbox(string.format("%f", cnt4),0,32767,0,0,1,cntChanged4)
 
 	form.addRow(1)
-	form.addLabel({label="Counter 5",font=FONT_BOLD})
+	form.addLabel({label="trans.counter5",font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label="Counter name",width=175})
+	form.addLabel({label=trans.counterName,width=175})
 	form.addTextbox(cntLb5,14,cntLbChanged5)
 	
 	form.addRow(2)
-	form.addLabel({label="Activating switch"})
+	form.addLabel({label=trans.switch})
 	form.addInputbox(cntSw5,true,cntSwChanged5)
 	
 	form.addRow(2)
-	form.addLabel({label="Current count"})
+	form.addLabel({label=trans.currentCnt})
 	form.addIntbox(string.format("%f", cnt5),0,32767,0,0,1,cntChanged5)
 	
 	form.addRow(1)
@@ -310,12 +336,12 @@ end
 ----------------------------------------------------------------------
 -- Application initialization
 local function init()
-	system.registerForm(1,MENU_APPS,appName,initForm)	
-	cntLb1 = system.pLoad("cntLb1", "Counter 1")
-	cntLb2 = system.pLoad("cntLb2", "Counter 2")
-	cntLb3 = system.pLoad("cntLb3", "Counter 3")
-	cntLb4 = system.pLoad("cntLb4", "Counter 4")
-	cntLb5 = system.pLoad("cntLb5", "Counter 5")
+	system.registerForm(1,MENU_APPS,trans.appName,initForm)	
+	cntLb1 = system.pLoad("cntLb1",trans.counter1)
+	cntLb2 = system.pLoad("cntLb2",trans.counter2)
+	cntLb3 = system.pLoad("cntLb3",trans.counter3)
+	cntLb4 = system.pLoad("cntLb4",trans.counter4)
+	cntLb5 = system.pLoad("cntLb5",trans.counter5)
 	cntAlm1 = system.pLoad("cntAlm1", 0)
 	cntAlm2 = system.pLoad("cntAlm2", 0)
 	cnt1 = system.pLoad("cnt1", 0)
@@ -330,10 +356,11 @@ local function init()
 	cntSw5 = system.pLoad("cntSw5")
 	system.registerTelemetry(1,cntLb1,1,printCounter1)
 	system.registerTelemetry(2,cntLb2,1,printCounter2)
-	system.registerControl(8, "Counter 1 Alm", "CS1")
-	system.registerControl(9, "Counter 2 Alm", "CS2")
+	system.registerControl(8,trans.control1,trans.cs1)
+	system.registerControl(9,trans.control2,trans.cs2)
 	system.setControl(8, 0, 0, 0)
 	system.setControl(9, 0, 0, 0)
 end
 ----------------------------------------------------------------------
-return { init=init, loop=loop, author="RC-Thoughts", version="1.3", name=appName}
+setLanguage()
+return { init=init, loop=loop, author="RC-Thoughts", version="1.4", name=trans.appName}

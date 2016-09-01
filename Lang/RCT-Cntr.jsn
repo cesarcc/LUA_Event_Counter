@@ -1,0 +1,37 @@
+{
+  "default":"en",
+  "en":{
+    "appName":"Event Counter",
+	"labelW":"Telemetry Window Label",
+	"counterName":"Counter Name",
+    "counter1":"Counter 1",
+	"counter2":"Counter 2",
+	"counter3":"Counter 3",
+	"counter4":"Counter 4",
+	"counter5":"Counter 5",
+	"switch":"Activating Switch",
+    "currentCnt":"Current Count",
+    "almVal":"Alarm Value",
+	"control1":"Counter 1 Alm",
+	"control2":"Counter 2 Alm",
+	"cs1":"CS1",
+	"cs2":"CS2"
+  },
+  "de":{
+    "appName":"Ereigniszähler",
+	"labelW":"Telemetrie Fenster",
+	"counterName":"Zähler Name",
+    "counter1":"Zähler 1",
+	"counter2":"Zähler 2",
+	"counter3":"Zähler 3",
+	"counter4":"Zähler 4",
+	"counter5":"Zähler 5",
+	"switch":"Aktivierungsschalter",
+    "currentCnt":"Aktuelle Anzahl",
+    "almVal":"Alarmwert",
+	"control1":"Zähler 1 Alm",
+	"control2":"Zähler 2 Alm",
+	"cs1":"ZA1",
+	"cs2":"ZA2"
+  }
+}
