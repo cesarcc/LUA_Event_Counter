@@ -19,6 +19,8 @@
 	Max value is 32767, after that counter resets to 0.
 	
 	Localisation-file has to be as /Apps/Lang/RCT-Cntr.jsn
+	
+	French translation courtesy from Daniel Memim
 	---------------------------------------------------------
 	Event Counter is a part of RC-Thoughts Jeti Tools.
 	---------------------------------------------------------
@@ -363,4 +365,4 @@ local function init()
 end
 ----------------------------------------------------------------------
 setLanguage()
-return { init=init, loop=loop, author="RC-Thoughts", version="1.4", name=trans.appName}
+return { init=init, loop=loop, author="RC-Thoughts", version="1.5", name=trans.appName}

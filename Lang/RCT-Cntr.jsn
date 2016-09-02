@@ -33,5 +33,22 @@
 	"control2":"Zähler 2 Alm",
 	"cs1":"ZA1",
 	"cs2":"ZA2"
+  },
+  "fr":{
+    "appName":"Compteur d'Evénements",
+	"labelW":"Editer le Nom",
+	"counterName":"Editer le Nom",
+    "counter1":"Compteur 1",
+	"counter2":"Compteur 2",
+	"counter3":"Compteur 3",
+	"counter4":"Compteur 4",
+	"counter5":"Compteur 5",
+	"switch":"Inter d'activation",
+    "currentCnt":"Niveau du Compteur",
+    "almVal":"Valeur d'alarme",
+	"control1":"Compteur 1 Alm",
+	"control2":"Compteur 1 Alm",
+	"cs1":"CA1",
+	"cs2":"CA2"
   }
 }
