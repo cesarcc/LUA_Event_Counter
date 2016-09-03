@@ -58,7 +58,7 @@ local function setLanguage()
 	local file = readFile("Apps/Lang/RCT-Cntr.jsn")
 	local obj = json.decode(file)  
 	if(obj) then
-		trans = obj[lng] or obj[obj.default]
+		trans1 = obj[lng] or obj[obj.default]
 	end
 end
 ----------------------------------------------------------------------
@@ -167,86 +167,86 @@ local function initForm()
 	form.addLabel({label="---     RC-Thoughts Jeti Tools      ---",font=FONT_BIG})
 	
 	form.addRow(1)
-	form.addLabel({label=trans.counter1,font=FONT_BOLD})
+	form.addLabel({label=trans1.counter1,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label=trans.labelW,width=175})
+	form.addLabel({label=trans1.labelW,width=175})
 	form.addTextbox(cntLb1,14,cntLbChanged1)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.switch})
+	form.addLabel({label=trans1.switch})
 	form.addInputbox(cntSw1,true,cntSwChanged1)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.currentCnt})
+	form.addLabel({label=trans1.currentCnt})
 	form.addIntbox(string.format("%f", cnt1),0,32767,0,0,1,cntChanged1)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.almVal})
+	form.addLabel({label=trans1.almVal})
 	form.addIntbox(string.format("%f", cntAlm1),0,32767,0,0,1,almChanged1)
 	
 	form.addRow(1)
-	form.addLabel({label=trans.counter2,font=FONT_BOLD})
+	form.addLabel({label=trans1.counter2,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label=trans.labelW,width=175})
+	form.addLabel({label=trans1.labelW,width=175})
 	form.addTextbox(cntLb2,14,cntLbChanged2)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.switch})
+	form.addLabel({label=trans1.switch})
 	form.addInputbox(cntSw2,true,cntSwChanged2)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.currentCnt})
+	form.addLabel({label=trans1.currentCnt})
 	form.addIntbox(string.format("%f", cnt2),0,32767,0,0,1,cntChanged2)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.almVal})
+	form.addLabel({label=trans1.almVal})
 	form.addIntbox(string.format("%f", cntAlm2),0,32767,0,0,1,almChanged2)
 	
 	form.addRow(1)
-	form.addLabel({label=trans.counter3,font=FONT_BOLD})
+	form.addLabel({label=trans1.counter3,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label=trans.counterName,width=175})
+	form.addLabel({label=trans1.counterName,width=175})
 	form.addTextbox(cntLb3,14,cntLbChanged3)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.switch})
+	form.addLabel({label=trans1.switch})
 	form.addInputbox(cntSw3,true,cntSwChanged3)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.currentCnt})
+	form.addLabel({label=trans1.currentCnt})
 	form.addIntbox(string.format("%f", cnt3),0,32767,0,0,1,cntChanged3)
 
 	form.addRow(1)
-	form.addLabel({label=trans.counter4,font=FONT_BOLD})
+	form.addLabel({label=trans1.counter4,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label=trans.counterName,width=175})
+	form.addLabel({label=trans1.counterName,width=175})
 	form.addTextbox(cntLb4,14,cntLbChanged4)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.switch})
+	form.addLabel({label=trans1.switch})
 	form.addInputbox(cntSw4,true,cntSwChanged4)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.currentCnt})
+	form.addLabel({label=trans1.currentCnt})
 	form.addIntbox(string.format("%f", cnt4),0,32767,0,0,1,cntChanged4)
 
 	form.addRow(1)
-	form.addLabel({label=trans.counter5,font=FONT_BOLD})
+	form.addLabel({label=trans1.counter5,font=FONT_BOLD})
 	
 	form.addRow(2)
-	form.addLabel({label=trans.counterName,width=175})
+	form.addLabel({label=trans1.counterName,width=175})
 	form.addTextbox(cntLb5,14,cntLbChanged5)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.switch})
+	form.addLabel({label=trans1.switch})
 	form.addInputbox(cntSw5,true,cntSwChanged5)
 	
 	form.addRow(2)
-	form.addLabel({label=trans.currentCnt})
+	form.addLabel({label=trans1.currentCnt})
 	form.addIntbox(string.format("%f", cnt5),0,32767,0,0,1,cntChanged5)
 	
 	form.addRow(1)
@@ -338,13 +338,12 @@ end
 ----------------------------------------------------------------------
 -- Application initialization
 local function init()
-	setLanguage()
-	system.registerForm(1,MENU_APPS,trans.appName,initForm)	
-	cntLb1 = system.pLoad("cntLb1",trans.counter1)
-	cntLb2 = system.pLoad("cntLb2",trans.counter2)
-	cntLb3 = system.pLoad("cntLb3",trans.counter3)
-	cntLb4 = system.pLoad("cntLb4",trans.counter4)
-	cntLb5 = system.pLoad("cntLb5",trans.counter5)
+	system.registerForm(1,MENU_APPS,trans1.appName,initForm)	
+	cntLb1 = system.pLoad("cntLb1",trans1.counter1)
+	cntLb2 = system.pLoad("cntLb2",trans1.counter2)
+	cntLb3 = system.pLoad("cntLb3",trans1.counter3)
+	cntLb4 = system.pLoad("cntLb4",trans1.counter4)
+	cntLb5 = system.pLoad("cntLb5",trans1.counter5)
 	cntAlm1 = system.pLoad("cntAlm1", 0)
 	cntAlm2 = system.pLoad("cntAlm2", 0)
 	cnt1 = system.pLoad("cnt1", 0)
@@ -359,11 +358,11 @@ local function init()
 	cntSw5 = system.pLoad("cntSw5")
 	system.registerTelemetry(1,cntLb1,1,printCounter1)
 	system.registerTelemetry(2,cntLb2,1,printCounter2)
-	system.registerControl(8,trans.cont1,trans.cs1)
-	system.registerControl(9,trans.cont2,trans.cs2)
+	system.registerControl(8,trans1.cont1,trans1.cs1)
+	system.registerControl(9,trans1.cont2,trans1.cs2)
 	system.setControl(8, 0, 0, 0)
 	system.setControl(9, 0, 0, 0)
 end
 ----------------------------------------------------------------------
 setLanguage()
-return { init=init, loop=loop, author="RC-Thoughts", version="1.6", name=trans.appName}
+return { init=init, loop=loop, author="RC-Thoughts", version="1.6", name=trans1.appName}
