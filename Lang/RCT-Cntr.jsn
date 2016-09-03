@@ -12,8 +12,8 @@
 	"switch":"Activating Switch",
     "currentCnt":"Current Count",
     "almVal":"Alarm Value",
-	"control1":"Counter 1 Alm",
-	"control2":"Counter 2 Alm",
+	"cont1":"Counter 1 Alm",
+	"cont2":"Counter 2 Alm",
 	"cs1":"CS1",
 	"cs2":"CS2"
   },
@@ -29,8 +29,8 @@
 	"switch":"Aktivierungsschalter",
     "currentCnt":"Aktuelle Anzahl",
     "almVal":"Alarmwert",
-	"control1":"Zähler 1 Alm",
-	"control2":"Zähler 2 Alm",
+	"cont1":"Zähler 1 Alm",
+	"cont2":"Zähler 2 Alm",
 	"cs1":"ZA1",
 	"cs2":"ZA2"
   },
@@ -46,8 +46,8 @@
 	"switch":"Inter d'activation",
     "currentCnt":"Niveau du Compteur",
     "almVal":"Valeur d'alarme",
-	"control1":"Compteur 1 Alm",
-	"control2":"Compteur 1 Alm",
+	"cont1":"Compteur 1 Alm",
+	"cont2":"Compteur 1 Alm",
 	"cs1":"CA1",
 	"cs2":"CA2"
   }

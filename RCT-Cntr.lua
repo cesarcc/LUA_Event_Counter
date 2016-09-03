@@ -338,6 +338,7 @@ end
 ----------------------------------------------------------------------
 -- Application initialization
 local function init()
+	setLanguage()
 	system.registerForm(1,MENU_APPS,trans.appName,initForm)	
 	cntLb1 = system.pLoad("cntLb1",trans.counter1)
 	cntLb2 = system.pLoad("cntLb2",trans.counter2)
@@ -358,11 +359,11 @@ local function init()
 	cntSw5 = system.pLoad("cntSw5")
 	system.registerTelemetry(1,cntLb1,1,printCounter1)
 	system.registerTelemetry(2,cntLb2,1,printCounter2)
-	system.registerControl(8,trans.control1,trans.cs1)
-	system.registerControl(9,trans.control2,trans.cs2)
+	system.registerControl(8,trans.cont1,trans.cs1)
+	system.registerControl(9,trans.cont2,trans.cs2)
 	system.setControl(8, 0, 0, 0)
 	system.setControl(9, 0, 0, 0)
 end
 ----------------------------------------------------------------------
 setLanguage()
-return { init=init, loop=loop, author="RC-Thoughts", version="1.5", name=trans.appName}
+return { init=init, loop=loop, author="RC-Thoughts", version="1.6", name=trans.appName}
