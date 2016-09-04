@@ -250,7 +250,7 @@ local function initForm()
 	form.addIntbox(string.format("%f", cnt5),0,32767,0,0,1,cntChanged5)
 	
 	form.addRow(1)
-	form.addLabel({label="Powered by RC-Thoughts.com",font=FONT_MINI, alignRight=true})
+	form.addLabel({label="Powered by RC-Thoughts.com - v."..cntrVersion.." ",font=FONT_MINI, alignRight=true})
 end
 ----------------------------------------------------------------------
 -- Runtime functions, read status of switches and store latching switch state
@@ -364,5 +364,6 @@ local function init()
 	system.setControl(9, 0, 0, 0)
 end
 ----------------------------------------------------------------------
+cntrVersion = "1.6"
 setLanguage()
-return { init=init, loop=loop, author="RC-Thoughts", version="1.6", name=trans1.appName}
+return { init=init, loop=loop, author="RC-Thoughts", version=cntrVersion, name=trans1.appName}
