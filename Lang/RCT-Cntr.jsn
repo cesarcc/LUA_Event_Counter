@@ -47,7 +47,24 @@
     "currentCnt":"Niveau du Compteur",
     "almVal":"Valeur d'alarme",
 	"cont1":"Compteur 1 Alm",
-	"cont2":"Compteur 1 Alm",
+	"cont2":"Compteur 2 Alm",
+	"cs1":"CA1",
+	"cs2":"CA2"
+  },
+  "es":{
+    "appName":"Contador de eventos",
+	"labelW":"Etiqueta de telemetría",
+	"counterName":"Nombre de contador",
+    "counter1":"Contador 1",
+	"counter2":"Contador 2",
+	"counter3":"Contador 3",
+	"counter4":"Contador 4",
+	"counter5":"Contador 5",
+	"switch":"Interruptor de activación",
+    "currentCnt":"Contador actual",
+    "almVal":"Valor de alarma",
+	"cont1":"Contador 1 Alm",
+	"cont2":"Contador 2 Alm",
 	"cs1":"CA1",
 	"cs2":"CA2"
   }
