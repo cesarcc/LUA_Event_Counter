@@ -21,6 +21,7 @@
 	Localisation-file has to be as /Apps/Lang/RCT-Cntr.jsn
 	
 	French translation courtesy from Daniel Memim
+	Spanish translation courtesy from César Casado
 	---------------------------------------------------------
 	Event Counter is a part of RC-Thoughts Jeti Tools.
 	---------------------------------------------------------
@@ -174,7 +175,7 @@ local function initForm()
 	form.addTextbox(cntLb1,14,cntLbChanged1)
 	
 	form.addRow(2)
-	form.addLabel({label=trans1.switch})
+	form.addLabel({label=trans1.switch,width=200})
 	form.addInputbox(cntSw1,true,cntSwChanged1)
 	
 	form.addRow(2)
@@ -193,7 +194,7 @@ local function initForm()
 	form.addTextbox(cntLb2,14,cntLbChanged2)
 	
 	form.addRow(2)
-	form.addLabel({label=trans1.switch})
+	form.addLabel({label=trans1.switch,width=200})
 	form.addInputbox(cntSw2,true,cntSwChanged2)
 	
 	form.addRow(2)
@@ -212,7 +213,7 @@ local function initForm()
 	form.addTextbox(cntLb3,14,cntLbChanged3)
 	
 	form.addRow(2)
-	form.addLabel({label=trans1.switch})
+	form.addLabel({label=trans1.switch,width=200})
 	form.addInputbox(cntSw3,true,cntSwChanged3)
 	
 	form.addRow(2)
@@ -227,7 +228,7 @@ local function initForm()
 	form.addTextbox(cntLb4,14,cntLbChanged4)
 	
 	form.addRow(2)
-	form.addLabel({label=trans1.switch})
+	form.addLabel({label=trans1.switch,width=200})
 	form.addInputbox(cntSw4,true,cntSwChanged4)
 	
 	form.addRow(2)
@@ -242,7 +243,7 @@ local function initForm()
 	form.addTextbox(cntLb5,14,cntLbChanged5)
 	
 	form.addRow(2)
-	form.addLabel({label=trans1.switch})
+	form.addLabel({label=trans1.switch,width=200})
 	form.addInputbox(cntSw5,true,cntSwChanged5)
 	
 	form.addRow(2)
@@ -364,6 +365,6 @@ local function init()
 	system.setControl(9, 0, 0, 0)
 end
 ----------------------------------------------------------------------
-cntrVersion = "1.6"
+cntrVersion = "1.7"
 setLanguage()
 return { init=init, loop=loop, author="RC-Thoughts", version=cntrVersion, name=trans1.appName}
